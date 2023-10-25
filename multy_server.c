@@ -114,7 +114,7 @@ void send_msg(int my_socket, char *addr, char *msg)
 void *handle_client(void *arg)
 {
     /*
-    사용자로 부터 메시지를 읽는 스레드 구동부입니다.
+    사용자로 부터 메시지를 읽고 전송하는 스레드의 메인 구동부입니다.
     각 커넥션 마다 스레드에 해당 함수가 배정됩니다.
     */
 
@@ -145,9 +145,9 @@ void *handle_client(void *arg)
         }
         else if (firt_msg)
         {
-            strcpy(name, client->buffer); // 닉네임 저장
+            strcpy(name, client->buffer); 
             printf("%s %lu\n", name, strlen(name));
-            sprintf(msg, "%s 님이 입장하셨습니다.", name);
+            sprintf(msg, "%s 님이 입장하셨습니다.", name); //닉네임 설정 메시지
             firt_msg = 0;
         }
         else if (connection->is_alive)
